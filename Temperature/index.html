@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 101vh;
+            margin: 0;
+            background: #638da7;
+        }
+
+        #converter {
+            text-align: center;
+            background: #f2f9df;
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 20 20 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #625e60;
+            margin-bottom: 20px;
+        }
+
+
+
+
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #600303;
+        }
+
+        input {
+            margin: 10px;
+            padding: 12px;
+            width: calc(50% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #66afe9;
+        }
+
+        p {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div id="converter">
+    <h1>محول الحرارة</h1>
+
+    <label for="fahrenheit">Fahrenheit:</label>
+    <input type="number" id="fahrenheit" placeholder="Enter temperature in Fahrenheit" oninput="convertTemperature('fahrenheit')">
+
+    <label for="celsius">Celsius:</label>
+    <label for="frhaint"> </label>
+
+
+
+
+
+    <input type="number" id="celsius" placeholder="أدخل الحرارة ب C" oninput="convertTemperature('celsius')">
+
+    <p id="result"></p>
+</div>
+
+<script>
+    function convertTemperature(unit) {
+        var resultElement = document.getElementById('result');
+        var temperature = document.getElementById(unit).value;
+
+        // Check if the input is empty
+        if (temperature.trim() === '') {
+            resultElement.textContent = "Please enter a temperature value.";
+            return;
+        }
+
+        // Convert the input to a number
+        temperature = parseFloat(temperature);
+
+        // Check if the input is a valid number
+        if (isNaN(temperature)) {
+            resultElement.textContent = "Please enter a valid number for the temperature.";
+            return;
+        }
+
+        if (unit === 'fahrenheit') {
+            var celsius = (temperature - 32) * 5 / 9;
+            document.getElementById('celsius').value = celsius.toFixed(2);
+        }
+
+        if (unit === 'celsius') {
+            var fahrenheit = (temperature * 9 / 5) + 32;
+            document.getElementById('fahrenheit').value = fahrenheit.toFixed(2);
+        }
+
+        resultElement.textContent = `${temperature.toFixed(2)}°${unit.charAt(0).toUpperCase() + unit.slice(1)} يساوي ${unit === 'fahrenheit' ? celsius.toFixed(2) + '°C' : fahrenheit.toFixed(2) + '°F'}`;
+    }
+</script>
+
+</body>
+</html>
